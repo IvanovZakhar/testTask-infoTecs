@@ -1,0 +1,11 @@
+.waiting{
+    color:rgb(175, 175, 175);
+}
+
+.in-progres{
+    color: rgb(98, 98, 239);
+}
+
+.completed{
+    color: rgb(5, 235, 5);
+}
