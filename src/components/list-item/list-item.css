@@ -9,3 +9,19 @@
 .completed{
     color: rgb(5, 235, 5);
 }
+
+span{
+    display: block;
+}
+
+.list-item{
+    display: flex;
+}
+
+.editing-a-list{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 5px;
+    left: 150px
+}
