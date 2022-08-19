@@ -1,21 +1,62 @@
+import React, { useState } from 'react';
 import StatusRadio from '../radio/radio';
 import './editing-a-list.css';
 
-const EditingAList = ({data, showCondition}) =>{
+
+
+const EditingAList = ({data, transformConditionName, transformConditionText, showCondition}) =>{
    
-    const {name, text, condition, status} = data;
+  const {name, text, classShow, id} = data;
 
-
-        return(
-            <div className="editing-a-list">
-                <div className="editing-a-list__condition"><span className={condition}>{status}</span></div>
-                <div className="editing-a-list__name"><br/><span>{name}</span></div>
-                <div className="editing-a-list__text"><br/>{text}</div>
-                <StatusRadio data={data} showCondition={showCondition}/>
-            </div>
-            
-        )
+  const [value, setValue] = useState('Введите имя');
+  function chengeValue(e) {
+        
+    setValue(e.target.value);
+    transformConditionName(e.target.value, id)
     
+ }
+
+  let className = 'editing-a-list' 
+console.log(classShow)
+  if(classShow === 'show'){
+      className += ' show'
+ 
+  }
+
+
+ 
+  return(
+      <div className={className}>
+             
+                  <input type="text"
+                      className="form-control"
+                      placeholder="Название"
+                      name="name" 
+                      defaultValue={name}
+                      onClick={() => setValue(name)}
+                      value={value}
+                      onChange={(e) => chengeValue(e)}
+                      />
+
+                  <input type="text"
+                      className="form-control"
+                      placeholder="Текст"
+                      name="text"
+                      defaultValue={text} 
+                      onChange={(e) => transformConditionText(e.target.value, id)}
+                      />    
+
+
+          <StatusRadio data={data} showCondition={showCondition}/>
+      </div>
+      
+  )
+
 }
+   
+
+
+    
+
 
 export default EditingAList;

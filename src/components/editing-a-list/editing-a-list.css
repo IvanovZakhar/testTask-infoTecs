@@ -1,6 +1,8 @@
 .editing-a-list{
+    display: none;
     width: 600px;
     height: 500px;
+    position: relative;
 }
 
 .editing-a-name{
@@ -9,4 +11,8 @@
 
 .editing-a-list__text{
     padding: 20px;
+}
+
+.show{
+    display: block;
 }

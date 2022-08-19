@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import './radio.css' ;
 
 const StatusRadio = ({data, showCondition}) => {
-   
-    const {classShow} = data;
+    const {id} = data;
+ 
 
-    let className = 'radio' 
-
-    if(classShow === 'show'){
-        className += ' show'
-    }
-
+  
 
 
     
@@ -26,23 +21,33 @@ const StatusRadio = ({data, showCondition}) => {
     function chengeValue(e) {
         
        setValue(e.target.value);
-       showCondition(e.target.value)
+       showCondition(e.target.value, id)
     }
  
-    return (<div className={className}>
-       <input type="radio" name="radio" value="waiting"
-       checked={value === 'waiting' ? true : false}
-       onChange={(e) => chengeValue(e)} 
-     
-       />
- 
-       <input type="radio" name="radio" value="in-progres"
-       checked={value === 'in-progres' ? true : false}
-       onChange={(e) => chengeValue(e)} />
- 
-       <input type="radio" name="radio" value="completed"
-       checked={value === 'completed' ? true : false}
-       onChange={(e) => chengeValue(e)} />
+    return (
+    <div className="radio">
+
+        <p className='radio-item'>
+            Ожидание
+            <input type="radio" name="radio" value="waiting"
+            checked={value === 'waiting' ? true : false}
+            onChange={(e) => chengeValue(e)} />
+        </p>
+
+        <p className='radio-item'>
+            В процессе
+            <input type="radio" name="radio" value="in-progres"
+            checked={value === 'in-progres' ? true : false}
+            onChange={(e) => chengeValue(e)} />
+         </p>
+
+        <p className='radio-item'> 
+            Выполнено
+            <input type="radio" name="radio" value="completed"
+            checked={value === 'completed' ? true : false}
+            onChange={(e) => chengeValue(e)} />
+        </p>
+
     </div>)
 }
 

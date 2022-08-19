@@ -4,6 +4,7 @@ import List from '../list/list';
 import EditingAList from '../editing-a-list/editing-a-list';
 
 
+
 class App extends Component{
     constructor(props){
         super()
@@ -18,13 +19,29 @@ class App extends Component{
                
             ]
         }
+        this.maxId = 4;
     }
 
-    onShowContent = (item) => {
+    addItem = (name)  => {
+        const newItem = {
+            name, 
+            text: 'Введите заметку',
+            condition: '',
+            id: this.maxId++
+        }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem];
+            return {
+                data: newArr
+            }
+        });
+    }
+
+    onShowContent = (item = this.state.data, id = 1) => {
         this.setState(({content}) => {
             let data 
             let conditionNow;
-
+       
             if(item.condition === 'waiting'){
                 conditionNow = 'Ожидание'
             }else if(item.condition === 'in-progres'){
@@ -36,12 +53,12 @@ class App extends Component{
                     data = ''
                 }else{ 
                     data = {
-                        name: `Название: ${item.name} `, 
-                        text: `Текст: ${item.name} `,
+                        name: item.name , 
+                        text: item.text ,
                         status: `Cостояние: ${conditionNow} `,
                         condition: item.condition,
                         classShow: 'show',
-                        id: item.id
+                        id: id 
                     }
                 }
 
@@ -51,6 +68,7 @@ class App extends Component{
         })
     }
 
+   
     
     // С помощью данной функции при вызове события onDelete(который будет вызыватся в компонентне ListItem )..
     // .. мы будем получать id с this.state.data
@@ -63,18 +81,63 @@ class App extends Component{
        })
     }
 
-    showCondition = (con) =>{
-        console.log(con)
+    showCondition = (con, id) =>{
+        this.setState(({data}) =>({
+            data: data.map(item => {
+                if(item.id === id){
+                    return{...item, condition: con}
+                }
+
+                return item;
+            })
+        }))
+
     }
 
-    
 
+    transformConditionName = (name, id) =>{
+        this.setState(({data}) =>({
+            data: data.map(item => {
+                if(item.id === id){
+                    return{...item, name: name}
+                }
+
+                return item;
+            })
+        }))
+
+    }
+
+    transformConditionText = (text, id) =>{
+        this.setState(({data}) =>({
+            data: data.map(item => {
+                if(item.id === id){
+                    return{...item, text: text}
+                }
+
+                return item;
+            })
+        }))
+
+    }
 
     render(){
+       
         return(
             <div className="app">
-                <List data={this.state.data} onShowContent={this.onShowContent} onDelete={this.deleteItem}/>
-                <EditingAList data={this.state.content} showCondition={this.showCondition}/>
+                
+                <List   data={this.state.data} 
+                        onShowContent={this.onShowContent}
+                        onDelete={this.deleteItem}
+                        onAdd={this.addItem}
+                 />
+                <EditingAList
+                    onClick={this.ok}
+                    data={this.state.content}
+                    showCondition={this.showCondition} 
+                    transformConditionName ={this.transformConditionName}
+                    transformConditionText ={this.transformConditionText}/>
+                
                 
             </div>
         )
