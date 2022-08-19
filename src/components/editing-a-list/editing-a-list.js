@@ -1,19 +1,19 @@
+import StatusRadio from '../radio/radio';
 import './editing-a-list.css';
 
-const EditingAList = ({data}) =>{
-    const {name, text} = data;
+const EditingAList = ({data, showCondition}) =>{
+   
+    const {name, text, condition, status} = data;
 
-    console.log(name)
-    console.log(text)
-    
+
         return(
             <div className="editing-a-list">
-                
-                <div className="editing-a-list__text">
-                  {name}
-                  {text}
-                </div>
+                <div className="editing-a-list__condition"><span className={condition}>{status}</span></div>
+                <div className="editing-a-list__name"><br/><span>{name}</span></div>
+                <div className="editing-a-list__text"><br/>{text}</div>
+                <StatusRadio data={data} showCondition={showCondition}/>
             </div>
+            
         )
     
 }

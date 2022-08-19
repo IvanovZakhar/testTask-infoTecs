@@ -1,5 +1,19 @@
 .app{
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 750px;
     display: flex;
+    border: 5px solid black;
+    margin-top: 100px;
+}
+
+.waiting{
+    color:rgb(175, 175, 175);
+}
+
+.in-progres{
+    color: rgb(98, 98, 239);
+}
+
+.completed{
+    color: rgb(5, 235, 5);
 }

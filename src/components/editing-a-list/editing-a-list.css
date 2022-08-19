@@ -1,11 +1,12 @@
 .editing-a-list{
-    height: 100%;
+    width: 600px;
+    height: 500px;
 }
 
-.editing-a-list__name{
-    height: 10px;
+.editing-a-name{
+    text-align: center;
 }
 
 .editing-a-list__text{
-    height: 10px;
+    padding: 20px;
 }
